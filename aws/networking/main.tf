@@ -4,7 +4,7 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
 
   tags = {
-    Name = "demo-vpc"
+    Name = var.vpc_name
   }
 }
 
@@ -14,12 +14,12 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "public-subnet"
+    Name = var.subnet_name
   }
 }
 
 resource "aws_security_group" "web_sg" {
-  name        = "web-security-group"
+  name        = var.security_group_name
   description = "Allow HTTP and HTTPS traffic"
   vpc_id      = aws_vpc.main.id
 
@@ -48,6 +48,6 @@ resource "aws_security_group" "web_sg" {
   }
 
   tags = {
-    Name = "web-sg"
+    Name = var.security_group_name
   }
 }
